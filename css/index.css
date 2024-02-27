@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0f0f1a; /* Dark blue-gray background */
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.topbar {
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    background-color: #0c47e9; /* Slightly different blue-gray for contrast */
+    padding: 10px 0;
+    text-align: center;
+}
+
+.topbar nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+
+.canvas {
+    position: absolute;
+    top: 15%;
+    bottom: 10%;
+    width: 100%;
+    background-color: #01142b;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+
