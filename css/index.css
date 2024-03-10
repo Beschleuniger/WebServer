@@ -1,14 +1,16 @@
+
 body {
-    margin: 0;
-    padding: 0;
     background-color: #0f0f1a; /* Dark blue-gray background */
     color: white;
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 .topbar {
-    position: absolute;
-    top: 10%;
+    position: relative;
+    margin-top: 5%;
     width: 100%;
     background-color: #0c47e9; /* Slightly different blue-gray for contrast */
     padding: 10px 0;
@@ -22,20 +24,47 @@ body {
     font-size: 16px;
 }
 
-.canvas {
-    position: absolute;
-    top: 15%;
-    bottom: 10%;
-    width: 100%;
-    background-color: #01142b;
-    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 h1 {
     font-size: 48px;
 }
 
+.canvas {
+    top: 15%;
+    width: 100%;
+    /*background-color: #01142b;*/
+    background-image: linear-gradient(to bottom, #01142b, #18003f);
+    /*clip-path: polygon(0 0, 0 100%, 5% 90%, 10% 100%, 15% 90%, 20% 100%, 25% 90%, 30% 100%, 35% 90%, 40% 100%, 45% 90%, 50% 100%, 55% 90%, 60% 100%, 65% 90%, 70% 100%, 75% 90%, 80% 100%, 85% 90%, 90% 100%, 95% 90%, 100% 100%, 100% 0);*/
+    display: flex;
 
+
+    /*clip-path: polygon(0 0, 0 90%, 5% 100%, 10% 90%, 15% 100%, 20% 90%, 25% 100%, 30% 90%, 35% 100%, 40% 90%, 45% 100%, 50% 90%, 55% 100%, 60% 90%, 65% 100%, 70% 90%, 75% 100%, 80% 90%, 85% 100%, 90% 90%, 95% 100%, 100% 90%, 100% 0);
+    */
+    transition: clip-path 0.5s ease;
+}
+
+@keyframes brokenNeon {
+    0%, 90%, 100% {
+        text-shadow: 0 0 8px rgba(255, 20, 147, 0.9), 0 0 10px rgba(255, 105, 180, 0.7), 0 0 20px rgba(255, 0, 255, 0.6), 0 0 30px rgba(255, 20, 147, 0.5);
+        opacity: 1;
+    }
+    91%, 93%, 97%, 99% {
+        text-shadow: 0 0 20px rgba(255, 105, 180, 0.9), 0 0 30px rgba(255, 0, 255, 0.8), 0 0 40px rgba(255, 20, 147, 0.6);
+        opacity: 1;
+    }
+    92%, 96%, 98% {
+        text-shadow: 0 0 2px rgba(255, 20, 147, 0.5);
+        opacity: 0.5;
+    }
+}
+
+#overlayText {
+    position: absolute;
+    top: 50%; 
+    width: 100%;
+    color: white;
+    font-size: 5em;
+    font-family: "Century Gothic";
+    font-weight: "bold";
+    text-align: center; 
+    animation: brokenNeon 21.5s infinite;
+}

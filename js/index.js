@@ -1,5 +1,5 @@
 addEventListener("DOMContentLoaded", function() {
-  var canvas = document.getElementById('canvasObject');
+  var canvas = document.getElementById('canvasBubbles');
 
   var ctx = canvas.getContext('2d');
 
@@ -12,6 +12,7 @@ addEventListener("DOMContentLoaded", function() {
   canvas.height = style_height * dpi;
   canvas.width =  style_width * dpi;
   
+  resizeCanvas();
 
   const YSPEED = 2.0;
   const MAXCIRCLES = 25;
@@ -20,7 +21,7 @@ addEventListener("DOMContentLoaded", function() {
 
   const MAXCIRCLERADIUS = 80;
   const MINCIRCLERADIUS = 20;
-
+  const HEIGHTPERCENTAGE = 0.8;
 
   var circles = [];
 
@@ -55,12 +56,54 @@ addEventListener("DOMContentLoaded", function() {
 
     circles = circles.filter(circle => circle.y + circle.radius > 0);
 
+
     requestAnimationFrame(update);
 
   }
 
-
   setInterval(createCircle, SPAWNSPEED);
 
   update();
+
+  window.addEventListener("resize", resizeCanvas);
+
+  
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    updateSpikes();
+  }
+
+  function updateSpikes() {
+    const spikeWidth = 80;
+    let numberOfSpikes = Math.floor(canvas.width / spikeWidth);
+
+    if (numberOfSpikes % 2 === 0) {
+      numberOfSpikes++;
+    } 
+
+    let points = [];
+
+    points.push(`${0}% ${0}%`);
+    
+    for (let i = 0; i < numberOfSpikes; i++) {
+      
+      const x  = (i / (numberOfSpikes - 1)) * 100;
+      const y  = (i % 2 === 0) ? 90 : 100;
+
+      points.push(`${x}% ${y}%`);
+    }
+
+    points.push(`${100}% ${90}%`);
+    points.push(`${100}% ${0}%`);
+    
+
+    const clipPathPolygon = `polygon(${points.join(', ')})`;
+
+    document.getElementById("canvasBubbles").style.clipPath = clipPathPolygon;
+  }
+
+
+
 });

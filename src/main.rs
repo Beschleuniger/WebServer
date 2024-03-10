@@ -79,12 +79,14 @@ fn not_found(_req: &Request) -> RawHtml<&'static str> {
 
 
 
-#[launch]
-fn rocket() -> _ {
-    rocket::build()
+#[shuttle_runtime::main]
+async fn rocket() -> shuttle_rocket::ShuttleRocket {
+    let r = rocket::build()
             .mount("/", routes![index, db, cock])
             .mount("/user/", routes![dynamic])
             .mount("/css", FileServer::from(relative!("/css")))
             .mount("/js", FileServer::from(relative!("/js")))
-            .register("/", catchers![not_found])
+            .register("/", catchers![not_found]);
+
+    Ok(r.into())
 }
